@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+@author: sensenliu
+"""
+
+"""
+Definition of TreeNode:
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left, self.right = None, None
+"""
+
+
+class Solution:
+    """
+    @param: root: the root of binary tree
+    @param: target: An integer
+    @return: all valid paths
+    """
+    def binaryTreePathSum(self, root, target):
+        ans = [] 
+        path = []
+        self.dfs(root, target, 0 ,path, ans) 
+        
+        return ans 
+        
+    def dfs(self, node, target, current , path ,ans ) :
+        if node is None:
+            return 
+        
+
+        path.append(node.val) 
+        if not node.left and not node.right and current + node.val == target:
+            ans.append(path[:])
+        
+        self.dfs(node.left, target, current + node.val, path ,ans)
+
+        self.dfs(node.right, target, current + node.val, path, ans)
+            
+        path.pop()
+
